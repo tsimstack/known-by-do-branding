@@ -1,0 +1,136 @@
+/* =========================================================================
+   Thank-you page — full-bleed image background with overlay copy.
+   Depends on tokens from /shared/styles/colors_and_type.css.
+   ========================================================================= */
+
+/* ---------- Escape GHL wrapper constraints --------------------------------
+   Same pattern as the landing page — zero out the ancestor wrappers that
+   GHL injects so this section controls its own width. */
+:has(> #kb-thanks),
+:has(> * > #kb-thanks),
+:has(> * > * > #kb-thanks),
+:has(> * > * > * > #kb-thanks),
+:has(> * > * > * > * > #kb-thanks),
+:has(> * > * > * > * > * > #kb-thanks),
+:has(> * > * > * > * > * > * > #kb-thanks),
+:has(> * > * > * > * > * > * > * > #kb-thanks) {
+  max-width: none !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+html, body { background: var(--kb-brown); color: var(--kb-off-white); }
+body { overflow-x: hidden; }
+
+.thanks {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  color: var(--kb-off-white);
+  background-image: url('https://cdn.jsdelivr.net/gh/tsimstack/known-by-do-branding@main/images/Known-By-Studio-DSC09488.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Dark scrim for white-text legibility over the photo. Slightly heavier
+   in the middle band where the heading sits. */
+.thanks::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(41,28,16,0.55) 0%,
+    rgba(41,28,16,0.70) 50%,
+    rgba(41,28,16,0.60) 100%);
+  z-index: 0;
+}
+
+.thanks > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Header ---------- */
+.thanks__header {
+  padding: 32px var(--kb-site-margin);
+}
+.thanks__logo {
+  width: 140px;
+  height: auto;
+  display: block;
+  opacity: 0.95;
+}
+
+/* ---------- Main ---------- */
+.thanks__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px var(--kb-site-margin);
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.thanks__heading {
+  font-family: var(--kb-font-sans);
+  font-weight: 400;
+  font-size: clamp(44px, 6vw, 88px);
+  line-height: 1.0;
+  letter-spacing: -0.035em;
+  margin: 0 0 28px;
+  color: var(--kb-off-white);
+  text-wrap: balance;
+}
+
+.thanks__body {
+  font-family: var(--kb-font-sans);
+  font-size: var(--kb-fs-lead);
+  line-height: 1.45;
+  margin: 0 0 40px;
+  max-width: 56ch;
+  text-wrap: balance;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.thanks__cta {
+  display: inline-block;
+  background: var(--kb-off-white);
+  color: var(--kb-brown);
+  padding: 16px 28px;
+  border-radius: 999px;
+  font-family: var(--kb-font-sans);
+  font-size: var(--kb-fs-body);
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform .2s ease, background .2s ease;
+}
+.thanks__cta:hover {
+  transform: translateY(-1px);
+  background: #F4EFE9;
+}
+
+/* ---------- Footer ---------- */
+.thanks__footer {
+  padding: 24px var(--kb-site-margin) 32px;
+  text-align: center;
+  font-size: var(--kb-fs-xs);
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .thanks__header { padding: 24px var(--kb-site-margin); }
+  .thanks__logo { width: 120px; }
+  .thanks__main { padding: 32px var(--kb-site-margin); }
+  .thanks__heading { margin-bottom: 20px; }
+  .thanks__body { margin-bottom: 32px; }
+}
