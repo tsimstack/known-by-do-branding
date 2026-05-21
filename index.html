@@ -95,6 +95,7 @@
 
       const setPositions = (percent) => {
         bounds = splitter.getBoundingClientRect();
+        if (!bounds.width) return;
         const positionX = (percent / 100) * bounds.width;
         gsap.set(handle, { x: positionX, left: 0 });
         gsap.set(after, { clipPath: `inset(0 0 0 ${percent}%)` });
@@ -102,7 +103,7 @@
 
       setPositions(currentPercent);
 
-      Draggable.create(handle, {
+      const draggable = Draggable.create(handle, {
         type: 'x',
         bounds: splitter,
         cursor: 'ew-resize',
@@ -111,9 +112,26 @@
           currentPercent = (this.x / bounds.width) * 100;
           gsap.set(after, { clipPath: `inset(0 0 0 ${currentPercent}%)` });
         }
-      });
+      })[0];
 
-      window.addEventListener('resize', () => setPositions(currentPercent));
+      const resync = () => {
+        setPositions(currentPercent);
+        if (draggable) draggable.update();
+      };
+
+      // Re-sync whenever the splitter itself resizes — covers web fonts loading,
+      // images decoding, GHL iframe paint, container queries, etc.
+      if ('ResizeObserver' in window) {
+        new ResizeObserver(resync).observe(splitter);
+      } else {
+        window.addEventListener('resize', resync);
+      }
+
+      // Belt-and-braces: re-sync once everything has finished loading.
+      window.addEventListener('load', resync);
+      splitter.querySelectorAll('img').forEach((img) => {
+        if (!img.complete) img.addEventListener('load', resync, { once: true });
+      });
     });
   }
   initBeforeAfterSplitSlider();
