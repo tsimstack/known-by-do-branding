@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 263">
   <defs>
-    
+    <style>.cls-1 { fill: #FFFFFF; }</style>
   </defs>
   <path class="cls-1" d="M50.58,115.46L152.08,4.19h61.74l-99.06,107.08,102.2,147.55h-60.34l-78.48-113.36-27.56,29.65v83.71H0V4.19h50.58v111.27Z"></path>
   <path class="cls-1" d="M471.93,258.82h-42.9l-123.83-179.64v179.64h-49.18V4.19h49.88l116.85,170.22V4.19h49.18v254.63Z"></path>
