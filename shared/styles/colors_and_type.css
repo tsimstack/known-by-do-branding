@@ -1,0 +1,215 @@
+/* =========================================================================
+   Known By — Design Tokens
+   Colors + Typography foundations.
+   Source: /Styleguide frame (node 2:2) + /Styleguide/Home frame (node 2405:60)
+   of "Known By Website 2026" Figma file.
+   ========================================================================= */
+
+/* ---------- Fonts ------------------------------------------------------- */
+@font-face {
+  font-family: "Die Grotesk A";
+  src: url("../fonts/DieGroteskA-Regular.woff2") format("woff2"),
+       url("../fonts/DieGroteskA-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Die Grotesk A";
+  src: url("../fonts/DieGroteskA-Bold.woff2") format("woff2"),
+       url("../fonts/DieGroteskA-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "GT Alpina";
+  src: url("../fonts/GTAlpina-Regular.woff2") format("woff2"),
+       url("../fonts/GTAlpina-Regular.woff") format("woff"),
+       url("../fonts/GTAlpina-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Tokens ------------------------------------------------------ */
+:root {
+  /* Brand palette — the Figma variables panel (per metadata) uses these
+     as the base theme. The brown #291C10 and off-white are the whole system. */
+  --kb-brown:        #291C10;   /* rgb(41,28,16)  — primary ink / dark bg */
+  --kb-off-white:    #FFFFFF;   /* rgb(255,255,255) — light bg / paper   */
+  --kb-ink:          #1F1D1E;   /* rgb(31,29,30)  — rule lines, deep ink */
+  --kb-muted:        #999999;   /* rgb(153,153,153) — placeholder text   */
+  --kb-line-light:   #E0E0E0;   /* rgb(224,224,224) — hairline dividers  */
+  --kb-line-soft:    #F4F4F4;   /* rgb(244,244,244) — section tint       */
+  --kb-pale:         #D9D9D9;   /* rgb(217,217,217) — image placeholder  */
+
+  /* Accent — chartreuse version pill on the styleguide header.
+     Used VERY sparingly (1 instance in the file). */
+  --kb-accent:       #C6FB50;
+
+  /* Semantic alpha ramps on the two base colors.
+     Rules in the figma use 0.20 hairlines over brown + over paper. */
+  --kb-on-dark-20:   rgba(255,255,255,0.20);
+  --kb-on-dark-60:   rgba(255,255,255,0.60);
+  --kb-on-paper-20:  rgba(31,29,30,0.20);
+  --kb-on-paper-60:  rgba(31,29,30,0.60);
+
+  /* Semantic surfaces ---------------------------------------------------- */
+  --kb-surface:           var(--kb-off-white);
+  --kb-surface-inverse:   var(--kb-brown);
+  --kb-fg:                var(--kb-brown);
+  --kb-fg-inverse:        var(--kb-off-white);
+  --kb-fg-muted:          var(--kb-muted);
+  --kb-rule:              var(--kb-on-paper-20);
+  --kb-rule-inverse:      var(--kb-on-dark-20);
+
+  /* Typography ---------------------------------------------------------- */
+  /* Primary sans — Die Grotesk A — used for all headings + UI + body.   */
+  /* Serif accent — GT Alpina — reserved for pull quotes/testimonials.   */
+  --kb-font-sans: "Die Grotesk A", "Neue Haas Grotesk", "Inter",
+                  ui-sans-serif, system-ui, sans-serif;
+  --kb-font-serif: "GT Alpina", "Tiempos Text", "Cormorant Garamond",
+                   ui-serif, Georgia, serif;
+
+  /* Scale — lifted directly from Styleguide type_item labels.           */
+  --kb-fs-display: 112px;   /* Display   — hero on dark header          */
+  --kb-fs-h1:      80px;    /* H1        — section titles on paper      */
+  --kb-fs-h2:      64px;    /* H2        — sub-section + CTA headlines  */
+  --kb-fs-h3:      48px;    /* H3        — service cards                */
+  --kb-fs-h4:      32px;    /* H4        — card heads                   */
+  --kb-fs-h5:      24px;
+  --kb-fs-h6:      20px;
+  --kb-fs-lead:    20px;
+  --kb-fs-body:    18px;    /* Body      — Die Grotesk A @ 1.35         */
+  --kb-fs-small:   16px;    /* Small     — meta, captions               */
+  --kb-fs-xs:      14px;    /* XS        — footer utilities             */
+  --kb-fs-label:   10px;    /* Label     — secondary meta               */
+
+  --kb-lh-display: 1.0;
+  --kb-lh-heading: 1.00;
+  --kb-lh-h2:      1.15;
+  --kb-lh-h3:      1.10;
+  --kb-lh-body:    1.35;    /* Die Grotesk's body rhythm from figma.     */
+  --kb-lh-ui:      1.50;
+
+  --kb-tracking-display: -0.03em;  /* -3% on all display/heading text     */
+  --kb-tracking-heading: -0.03em;
+  --kb-tracking-body:     0em;
+
+  /* Spacing & layout ----------------------------------------------------- */
+  --kb-space-1:   4px;
+  --kb-space-2:   8px;
+  --kb-space-3:  12px;
+  --kb-space-4:  16px;
+  --kb-space-5:  24px;
+  --kb-space-6:  32px;      /* site margin, rhythm unit                  */
+  --kb-space-7:  40px;
+  --kb-space-8:  64px;
+  --kb-space-9:  80px;      /* Section Space Small                       */
+  --kb-space-10: 112px;     /* Section Space Main                        */
+  --kb-space-11: 160px;     /* Section Space Large / Page Top            */
+
+  --kb-site-margin:  32px;
+  --kb-max-width:   1440px;
+
+  /* Corner radii — taken from Radius cards in the Global Styles frame.   */
+  --kb-radius-0:  0px;      /* default — the brand defaults to sharp     */
+  --kb-radius-sm: 5px;      /* link wrappers                             */
+  --kb-radius:    8px;      /* pills / small containers                  */
+  --kb-radius-lg: 16px;     /* large grid cards                          */
+  --kb-radius-full: 99999px;/* buttons, avatars                          */
+
+  /* Borders -------------------------------------------------------------- */
+  --kb-border:     1px;
+  --kb-border-md:  1.5px;
+  --kb-border-lg:  2px;
+}
+
+/* ---------- Typography classes ----------------------------------------- */
+/* These mirror the "class_item" labels in the styleguide (Display, H1 ...) */
+
+.kb-display {
+  font-family: var(--kb-font-sans);
+  font-weight: 400;
+  font-size: var(--kb-fs-display);
+  line-height: var(--kb-lh-display);
+  letter-spacing: var(--kb-tracking-display);
+}
+.kb-h1, h1 {
+  font-family: var(--kb-font-sans);
+  font-weight: 400;
+  font-size: var(--kb-fs-h1);
+  line-height: var(--kb-lh-heading);
+  letter-spacing: var(--kb-tracking-heading);
+}
+.kb-h2, h2 {
+  font-family: var(--kb-font-sans);
+  font-weight: 400;
+  font-size: var(--kb-fs-h2);
+  line-height: var(--kb-lh-h2);
+  letter-spacing: var(--kb-tracking-heading);
+}
+.kb-h3, h3 {
+  font-family: var(--kb-font-sans);
+  font-weight: 400;
+  font-size: var(--kb-fs-h3);
+  line-height: var(--kb-lh-h3);
+  letter-spacing: var(--kb-tracking-heading);
+}
+.kb-h4, h4 {
+  font-family: var(--kb-font-sans);
+  font-weight: 400;
+  font-size: var(--kb-fs-h4);
+  line-height: 1.20;
+  letter-spacing: var(--kb-tracking-heading);
+}
+.kb-h5, h5 { font-family: var(--kb-font-sans); font-size: var(--kb-fs-h5); line-height: 1.25; font-weight: 400; letter-spacing: -0.02em; }
+.kb-h6, h6 { font-family: var(--kb-font-sans); font-size: var(--kb-fs-h6); line-height: 1.3;  font-weight: 400; letter-spacing: -0.02em; }
+
+.kb-lead {
+  font-family: var(--kb-font-sans);
+  font-size: var(--kb-fs-lead);
+  line-height: var(--kb-lh-body);
+}
+.kb-body, p {
+  font-family: var(--kb-font-sans);
+  font-size: var(--kb-fs-body);
+  line-height: var(--kb-lh-body);
+  letter-spacing: var(--kb-tracking-body);
+}
+.kb-small { font-family: var(--kb-font-sans); font-size: var(--kb-fs-small); line-height: var(--kb-lh-body); }
+.kb-xs    { font-family: var(--kb-font-sans); font-size: var(--kb-fs-xs);    line-height: var(--kb-lh-ui); }
+.kb-label { font-family: var(--kb-font-sans); font-size: var(--kb-fs-label); line-height: var(--kb-lh-body); letter-spacing: 0.02em; }
+
+.kb-quote {
+  font-family: var(--kb-font-serif);
+  font-weight: 400;
+  font-size: var(--kb-fs-small);
+  line-height: var(--kb-lh-body);
+}
+.kb-quote-display {
+  font-family: var(--kb-font-sans);   /* large pull quotes switch back to sans */
+  font-weight: 400;
+  font-size: var(--kb-fs-h2);
+  line-height: var(--kb-lh-h2);
+  letter-spacing: var(--kb-tracking-heading);
+}
+
+/* ---------- Base element defaults -------------------------------------- */
+body {
+  margin: 0;
+  font-family: var(--kb-font-sans);
+  font-size: var(--kb-fs-body);
+  line-height: var(--kb-lh-body);
+  color: var(--kb-fg);
+  background: var(--kb-surface);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a { color: inherit; text-decoration: none; }
+a.kb-link-underline { text-decoration: underline; text-underline-offset: 3px; }
+hr { border: 0; border-top: 1px solid var(--kb-rule); margin: 0; }
+img, svg, video { display: block; max-width: 100%; }
+::selection { background: var(--kb-brown); color: var(--kb-off-white); }
