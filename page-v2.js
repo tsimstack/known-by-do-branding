@@ -9,6 +9,8 @@
   function initBeforeAfterSplitSlider() {
     const splitters = document.querySelectorAll('[data-splitter="wrap"]');
     splitters.forEach((splitter) => {
+      if (splitter.dataset.kbInit) return;
+      splitter.dataset.kbInit = '1';
       const handle = splitter.querySelector('[data-splitter="handle"]');
       const after = splitter.querySelector('[data-splitter="after"]');
       let bounds = splitter.getBoundingClientRect();
@@ -55,7 +57,6 @@
       });
     });
   }
-  initBeforeAfterSplitSlider();
   // Cascading slider — clip-path reveal carousel (selected work).
   function initCascadingSlider() {
 
@@ -73,6 +74,8 @@
     wrappers.forEach(setupInstance);
 
     function setupInstance(wrapper) {
+      if (wrapper.dataset.kbInit) return;
+      wrapper.dataset.kbInit = '1';
       const viewport = wrapper.querySelector('[data-cascading-viewport]');
       const prevButton = wrapper.querySelector('[data-cascading-slider-prev]');
       const nextButton = wrapper.querySelector('[data-cascading-slider-next]');
@@ -277,10 +280,6 @@
     }
   }
 
-  // Initialize Cascading Slider
-  document.addEventListener('DOMContentLoaded', function() {
-    initCascadingSlider();
-  });
   // Overlapping testimonial slider — drag horizontally; cards scale/rotate behind active.
   if (window.InertiaPlugin) gsap.registerPlugin(InertiaPlugin);
 
@@ -291,6 +290,8 @@
     inits.forEach(setupOverlappingSlider);
 
     function setupOverlappingSlider(init) {
+      if (init.dataset.kbInit) return;
+      init.dataset.kbInit = '1';
       const minScale = +(init.getAttribute('data-scale') ?? 0.45);
       const maxRotation = +(init.getAttribute('data-rotate') ?? -8);
       const inertia = true;
@@ -399,13 +400,12 @@
     }
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
-    initOverlappingSlider();
-  });
   // FAQ accordion — opening one closes the others.
-  (function () {
+  function initFaqAccordion() {
     const items = document.querySelectorAll('.faq__item');
     items.forEach(function (item) {
+      if (item.dataset.kbInit) return;
+      item.dataset.kbInit = '1';
       item.addEventListener('toggle', function () {
         if (!item.open) return;
         items.forEach(function (other) {
@@ -413,7 +413,27 @@
         });
       });
     });
-  })();
+  }
+
+  // Run every interactive init. Each is idempotent (guarded by data-kb-init),
+  // so repeated calls are safe. GHL is a single-page app that renders this
+  // embed late and can re-render it after hydration, so we fire on DOM ready,
+  // on window load, and a few delayed retries to bind to the FINAL DOM.
+  function kbInitAll() {
+    try { initBeforeAfterSplitSlider(); } catch (e) {}
+    try { initCascadingSlider(); } catch (e) {}
+    try { initOverlappingSlider(); } catch (e) {}
+    try { initFaqAccordion(); } catch (e) {}
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', kbInitAll);
+  } else {
+    kbInitAll();
+  }
+  window.addEventListener('load', kbInitAll);
+  [400, 1000, 2000, 3500].forEach(function (t) { setTimeout(kbInitAll, t); });
+
   gsap.registerPlugin(ScrollTrigger);
 
   const lenis = new Lenis({ anchors: true });
